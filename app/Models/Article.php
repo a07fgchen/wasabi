@@ -9,14 +9,16 @@ class Article extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'content','category_id'];
+
     public function authors()
     {
-        return $this->belongsToMany(User::class, 'article_user', 'id', 'user_id');
+        return $this->belongsToMany(User::class, 'article_user', 'article_id', 'user_id');
     }
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'id', 'article_id');
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
     public function comments()
